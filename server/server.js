@@ -382,6 +382,7 @@ app.post('/api/payslips/generate', authenticate, async (req, res) => {
       return res.status(400).json({ message: 'Either weekStart, startDate/endDate, or selectedDates is required' });
     }
     
+    console.log(`Generated ${payslips.length} payslips`);
     res.json(payslips);
     
     // Log the payslip generation

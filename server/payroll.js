@@ -566,12 +566,13 @@ export async function getPayrollReport(startDate, endDate = null) {
       params = [startDate, endDate];
     } else {
       // Single week query (backward compatibility)
+      // For single date, check if it falls within any payslip period
       query = `SELECT p.*, u.username, u.department 
                FROM payslips p 
                JOIN users u ON p.user_id = u.id 
-               WHERE p.week_start = ? 
+               WHERE (p.week_start = ? OR (? BETWEEN p.week_start AND p.week_end))
                ORDER BY u.department, u.username`;
-      params = [startDate];
+      params = [startDate, startDate];
     }
     
     console.log('Executing query:', query, 'with params:', params);

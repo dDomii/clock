@@ -147,7 +147,8 @@ export function PayrollReports() {
       let requestBody: any = {};
       
       if (generationMode === 'week') {
-        requestBody.weekStart = selectedWeek;
+        requestBody.startDate = selectedWeek;
+        requestBody.endDate = getWeekEnd(selectedWeek);
       } else {
         requestBody.selectedDates = selectedDates;
       }
@@ -188,7 +189,7 @@ export function PayrollReports() {
       let url = 'http://192.168.100.60:3001/api/payroll-report';
       
       if (generationMode === 'week') {
-        url += `?weekStart=${selectedWeek}`;
+        url += `?startDate=${selectedWeek}&endDate=${getWeekEnd(selectedWeek)}`;
       } else {
         const datesParam = selectedDates.join(',');
         url += `?selectedDates=${datesParam}`;
@@ -216,8 +217,12 @@ export function PayrollReports() {
       return;
     }
 
+    if (payrollData.length === 0) {
+      alert('No payslips to release. Please generate payslips first.');
+      return;
+    }
     const confirmed = window.confirm(
-      `Are you sure you want to release payslips for the selected ${generationMode === 'week' ? 'week' : 'dates'}? This will make them visible to employees.`
+      `Are you sure you want to release ${payrollData.length} payslips for the selected ${generationMode === 'week' ? 'week' : 'dates'}? This will make them visible to employees.`
     );
 
     if (!confirmed) return;
@@ -653,7 +658,7 @@ export function PayrollReports() {
           <button
             onClick={generatePayslips}
             disabled={loading || (generationMode === 'week' && !selectedWeek) || (generationMode === 'dates' && selectedDates.length === 0)}
-            className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 btn-enhanced flex items-center gap-2 shadow-lg"
+            className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 disabled:cursor-not-allowed btn-enhanced flex items-center gap-2 shadow-lg"
           >
             <FileText className="w-4 h-4" />
             {loading ? 'Generating...' : 'Generate Payslips'}
@@ -662,7 +667,7 @@ export function PayrollReports() {
           <button
             onClick={fetchPayrollReport}
             disabled={loading || (generationMode === 'week' && !selectedWeek) || (generationMode === 'dates' && selectedDates.length === 0)}
-            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 btn-enhanced flex items-center gap-2 shadow-lg"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed btn-enhanced flex items-center gap-2 shadow-lg"
           >
             <Eye className="w-4 h-4" />
             {loading ? 'Loading...' : 'View Report'}
@@ -670,11 +675,11 @@ export function PayrollReports() {
           
           <button
             onClick={releasePayslips}
-            disabled={loading || (generationMode === 'week' && !selectedWeek) || (generationMode === 'dates' && selectedDates.length === 0)}
-            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 disabled:opacity-50 btn-enhanced flex items-center gap-2 shadow-lg"
+            disabled={loading || payrollData.length === 0 || (generationMode === 'week' && !selectedWeek) || (generationMode === 'dates' && selectedDates.length === 0)}
+            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed btn-enhanced flex items-center gap-2 shadow-lg"
           >
             <CheckCircle className="w-4 h-4" />
-            Release Payslips
+            {payrollData.length > 0 ? `Release ${payrollData.length} Payslips` : 'Release Payslips'}
           </button>
         </div>
       </div>
