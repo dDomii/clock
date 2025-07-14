@@ -518,7 +518,7 @@ export function TimeTracking() {
                             <div className="flex items-center gap-3">
                               <Zap className="w-5 h-5 text-blue-400" />
                               <div>
-                                <p className="text-sm font-medium text-blue-400">Keep Going!</p>
+                                <p className="text-sm font-medium text-blue-400">Keep Going para sa 500K ni Dom!</p>
                                 <p className="text-xs text-blue-300">You're {hoursProgress.progressPercentage.toFixed(1)}% of the way there.</p>
                               </div>
                             </div>
