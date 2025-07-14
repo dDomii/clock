@@ -8,13 +8,30 @@ import { generateWeeklyPayslips, generatePayslipsForDateRange, generatePayslipsF
 import { pool } from './database.js';
 
 // Load environment variables
-dotenv.config();
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204,
+  credentials: true, // if your frontend sends cookies/credentials
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // support preflight for all routes
+
 app.use(express.json());
+
+// Initialize DB before starting server
+await initializeDatabase();
+
+app.post('/api/clock-in', async (req, res) => {
+  // clock-in logic…
+});
 
 // Initialize database
 await initializeDatabase();
