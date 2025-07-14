@@ -35,18 +35,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
-    try {
-      const handleClockIn = async () => {
+    const handleClockIn = async () => {
     setIsLoading(true);
     try {
       const response = await fetch('http://192.168.100.60:3001/api/clock-in', {
         method: 'POST',
         headers: { Authorization: Bearer ${token} },
       });
-      const data = await response.json();
-        body: JSON.stringify({ username, password }),
-      });
-
       const data = await response.json();
 
       if (data.success) {
