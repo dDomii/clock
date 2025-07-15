@@ -13,9 +13,19 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
+// Updated CORS configuration to handle both localhost and IP address
 const corsOptions = {
-  origin: 'http://192.168.100.60:5180',
-  optionsSuccessStatus: 200
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:5180',
+    'http://192.168.100.60:5180',
+    'http://127.0.0.1:5180'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-User-ID']
 };
 
 app.use(cors(corsOptions));
