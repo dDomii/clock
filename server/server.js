@@ -13,7 +13,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://192.168.100.60:5180',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Initialize database
