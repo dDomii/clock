@@ -8,30 +8,13 @@ import { generateWeeklyPayslips, generatePayslipsForDateRange, generatePayslipsF
 import { pool } from './database.js';
 
 // Load environment variables
-
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 3001;
 
-const corsOptions = {
-  origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 204,
-  credentials: true, // if your frontend sends cookies/credentials
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // support preflight for all routes
-
+app.use(cors());
 app.use(express.json());
-
-// Initialize DB before starting server
-await initializeDatabase();
-
-app.post('/api/clock-in', async (req, res) => {
-  // clock-in logic…
-});
 
 // Initialize database
 await initializeDatabase();
@@ -399,7 +382,6 @@ app.post('/api/payslips/generate', authenticate, async (req, res) => {
       return res.status(400).json({ message: 'Either weekStart, startDate/endDate, or selectedDates is required' });
     }
     
-    console.log(`Generated ${payslips.length} payslips`);
     res.json(payslips);
     
     // Log the payslip generation
