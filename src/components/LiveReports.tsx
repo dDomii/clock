@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS } from '../config/api';
 import { Activity, Clock, User, Calendar, RefreshCw, PhilippinePeso } from 'lucide-react';
 
 interface ActiveUser {
@@ -57,7 +58,7 @@ export function LiveReports() {
   const fetchActiveUsers = async () => {
     setIsRefreshing(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/active-users', {
+      const response = await fetch(API_ENDPOINTS.ACTIVE_USERS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();

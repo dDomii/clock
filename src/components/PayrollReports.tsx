@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS, buildApiUrl } from '../config/api';
 import { Calendar, Download, FileText, Users, PhilippinePeso, Clock, Edit3, Save, X, AlertTriangle, CheckCircle, Filter, Search, Eye, Trash2 } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import { autoTable } from 'jspdf-autotable';
@@ -121,7 +122,7 @@ export function PayrollReports() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/users', {
+      const response = await fetch(API_ENDPOINTS.USERS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -156,7 +157,7 @@ export function PayrollReports() {
         requestBody.userIds = selectedUsers;
       }
 
-      const response = await fetch('http://192.168.100.60:3001/api/payslips/generate', {
+      const response = await fetch(API_ENDPOINTS.PAYSLIPS_GENERATE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,13 +186,13 @@ export function PayrollReports() {
 
     setLoading(true);
     try {
-      let url = 'http://192.168.100.60:3001/api/payroll-report';
+      let url = API_ENDPOINTS.PAYROLL_REPORT;
       
       if (generationMode === 'week') {
-        url += `?weekStart=${selectedWeek}`;
+        url = buildApiUrl('/api/payroll-report', { weekStart: selectedWeek });
       } else {
         const datesParam = selectedDates.join(',');
-        url += `?selectedDates=${datesParam}`;
+        url = buildApiUrl('/api/payroll-report', { selectedDates: datesParam });
       }
       
       const response = await fetch(url, {
@@ -236,7 +237,7 @@ export function PayrollReports() {
         requestBody.userIds = selectedUsers;
       }
 
-      const response = await fetch('http://192.168.100.60:3001/api/payslips/release', {
+      const response = await fetch(API_ENDPOINTS.PAYSLIPS_RELEASE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -332,7 +333,7 @@ export function PayrollReports() {
     if (!editingEntry) return;
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/payroll/${editingEntry.id}`, {
+      const response = await fetch(`${API_ENDPOINTS.PAYROLL}/${editingEntry.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
