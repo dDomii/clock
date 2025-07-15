@@ -35,7 +35,6 @@ export const API_ENDPOINTS = {
   // Logs endpoints
   TIME_LOGS: `${API_BASE_URL}/api/time-logs`,
   PAYSLIP_LOGS: `${API_BASE_URL}/api/payslip-logs`,
-  PAYSLIP_LOGS: `${API_BASE_URL}/api/payslip-logs`,
   
   // Live reports
   ACTIVE_USERS: `${API_BASE_URL}/api/active-users`,
