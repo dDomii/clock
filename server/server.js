@@ -15,7 +15,7 @@ const port = process.env.PORT || 3001;
 
 const corsOptions = {
   origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000',
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 204,
   credentials: true, // if your frontend sends cookies/credentials
