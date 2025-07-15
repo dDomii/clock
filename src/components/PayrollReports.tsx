@@ -121,7 +121,7 @@ export function PayrollReports() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/users', {
+      const response = await fetch('http://192.168.100.60:3001/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -156,7 +156,7 @@ export function PayrollReports() {
         requestBody.userIds = selectedUsers;
       }
 
-      const response = await fetch('http://localhost:3001/api/payslips/generate', {
+      const response = await fetch('http://192.168.100.60:3001/api/payslips/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ export function PayrollReports() {
 
     setLoading(true);
     try {
-      let url = 'http://localhost:3001/api/payroll-report';
+      let url = 'http://192.168.100.60:3001/api/payroll-report';
       
       if (generationMode === 'week') {
         url += `?weekStart=${selectedWeek}`;
@@ -236,7 +236,7 @@ export function PayrollReports() {
         requestBody.userIds = selectedUsers;
       }
 
-      const response = await fetch('http://localhost:3001/api/payslips/release', {
+      const response = await fetch('http://192.168.100.60:3001/api/payslips/release', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -332,7 +332,7 @@ export function PayrollReports() {
     if (!editingEntry) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/payroll/${editingEntry.id}`, {
+      const response = await fetch(`http://192.168.100.60:3001/api/payroll/${editingEntry.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -360,7 +360,7 @@ export function PayrollReports() {
     if (!deletingEntry) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/payroll/${deletingEntry.id}`, {
+      const response = await fetch(`http://192.168.100.60:3001/api/payroll/${deletingEntry.id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

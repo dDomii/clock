@@ -48,7 +48,7 @@ export function DepartmentOverview() {
     setLoading(true);
     try {
       // Fetch users
-      const usersResponse = await fetch('http://localhost:3001/api/users', {
+      const usersResponse = await fetch('http://192.168.100.60:3001/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const usersData = await usersResponse.json();
@@ -84,7 +84,7 @@ export function DepartmentOverview() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3001/api/users/${userId}`, {
+      const response = await fetch(`http://192.168.100.60:3001/api/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

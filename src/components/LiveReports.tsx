@@ -57,7 +57,7 @@ export function LiveReports() {
   const fetchActiveUsers = async () => {
     setIsRefreshing(true);
     try {
-      const response = await fetch('http://localhost:3001/api/active-users', {
+      const response = await fetch('http://192.168.100.60:3001/api/active-users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();

@@ -107,7 +107,6 @@ export function PayrollHistory() {
     setLoading(true);
     try {
       let url = `http://192.168.100.60:3001/api/user-payroll-history`;
-      let url = `http://localhost:3001/api/user-payroll-history`;
       
       if (selectedDay) {
         // If specific day is selected, fetch only that day's data

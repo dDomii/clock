@@ -159,20 +159,14 @@ export function UserManagement() {
     }, 100);
   };
   const fetchUsers = async () => {
-    console.log('Attempting to fetch users from:', 'http://localhost:3001/api/users');
-    console.log('Token:', token ? 'Present' : 'Missing');
     try {
-      const response = await fetch('http://localhost:3001/api/users', {
+      const response = await fetch('http://192.168.100.60:3001/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
       const data = await response.json();
-      console.log('Users data:', data);
       setUsers(data);
     } catch (error) {
       console.error('Error fetching users:', error);
-      console.error('Error details:', error.message);
     }
   };
 
@@ -181,8 +175,8 @@ export function UserManagement() {
     
     try {
       const url = editingUser 
-        ? `http://localhost:3001/api/users/${editingUser.id}`
-        : 'http://localhost:3001/api/users';
+        ? `http://192.168.100.60:3001/api/users/${editingUser.id}`
+        : 'http://192.168.100.60:3001/api/users';
       
       const method = editingUser ? 'PUT' : 'POST';
       
@@ -216,7 +210,7 @@ export function UserManagement() {
     if (!selectedUserId) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/users/${selectedUserId}/adjust-time`, {
+      const response = await fetch(`http://192.168.100.60:3001/api/users/${selectedUserId}/adjust-time`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -248,7 +242,7 @@ export function UserManagement() {
     if (!deletingUser) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/users/${deletingUser.id}`, {
+      const response = await fetch(`http://192.168.100.60:3001/api/users/${deletingUser.id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
