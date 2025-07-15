@@ -370,31 +370,31 @@ export function TimeTracking() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-4">
-      {/* Compact Header */}
-      <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl p-4 border border-slate-700/50">
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      {/* Header Section */}
+      <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 shadow-lg">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-emerald-400 to-green-500 p-2 rounded-lg shadow-lg">
-              <Clock className="w-5 h-5 text-white" />
+          <div className="flex items-center gap-4">
+            <div className="bg-gradient-to-br from-emerald-400 to-green-500 p-3 rounded-xl shadow-lg">
+              <Clock className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">Welcome, {user?.username}</h1>
-              <p className="text-sm text-slate-400">{formatCurrentDate()}</p>
+              <h1 className="text-2xl font-bold text-white">Welcome back, {user?.username}</h1>
+              <p className="text-slate-400 mt-1">{formatCurrentDate()}</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-xs text-slate-400">Current Time</p>
-            <div className="text-lg font-mono font-bold text-emerald-400">{formatCurrentTime()}</div>
+            <p className="text-sm text-slate-400 mb-1">Current Time</p>
+            <div className="text-2xl font-mono font-bold text-emerald-400">{formatCurrentTime()}</div>
           </div>
         </div>
       </div>
 
-      {/* Compact Tabs */}
-      <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl border border-slate-700/50 overflow-hidden">
+      {/* Navigation Tabs */}
+      <div className="bg-slate-800/90 backdrop-blur-sm rounded-xl border border-slate-700/50 shadow-lg overflow-hidden">
         <div className="border-b border-slate-700/50">
-          <nav className="flex justify-center p-3">
-            <div className="bg-slate-700/30 p-1 rounded-lg flex gap-1">
+          <nav className="flex justify-center p-4">
+            <div className="bg-slate-700/30 p-1 rounded-xl flex gap-2">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -403,11 +403,11 @@ export function TimeTracking() {
                     onClick={() => setActiveTab(tab.id as TabType)}
                     className={`btn-enhanced ${
                       activeTab === tab.id
-                        ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-lg'
+                        ? 'bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-lg transform scale-105'
                         : 'text-slate-300 hover:text-white hover:bg-slate-600/50'
-                    } py-2 px-4 rounded-md font-medium text-sm flex items-center gap-2 transition-all duration-300`}
+                    } py-3 px-6 rounded-lg font-medium flex items-center gap-2 transition-all duration-300`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-5 h-5" />
                     {tab.label}
                   </button>
                 );
@@ -416,65 +416,69 @@ export function TimeTracking() {
           </nav>
         </div>
 
-        <div className="p-4">
+        <div className="p-6">
           {activeTab === 'time-tracking' && (
-            <div className="grid lg:grid-cols-12 gap-4">
-              {/* Progress Tracker - Compact */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Progress Tracker */}
               {hoursProgress && (
-                <div className="lg:col-span-3">
-                  <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-xl p-4 border border-blue-700/30 h-full">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Target className="w-4 h-4 text-blue-400" />
-                      <h3 className="text-sm font-semibold text-white">Progress</h3>
+                <div className="lg:col-span-1">
+                  <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-xl p-6 border border-blue-700/30 h-full">
+                    <div className="flex items-center gap-3 mb-6">
+                      <Target className="w-6 h-6 text-blue-400" />
+                      <h3 className="text-lg font-semibold text-white">Hours Progress</h3>
                     </div>
                     
-                    {/* Compact Circular Progress */}
-                    <div className="flex justify-center mb-3">
-                      <div className="relative w-20 h-20">
-                        <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
-                          <circle cx="40" cy="40" r="32" stroke="currentColor" strokeWidth="6" fill="none" className="text-slate-700" />
+                    {/* Circular Progress */}
+                    <div className="flex justify-center mb-6">
+                      <div className="relative w-32 h-32">
+                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
+                          <circle cx="60" cy="60" r="50" stroke="currentColor" strokeWidth="8" fill="none" className="text-slate-700" />
                           <circle
-                            cx="40" cy="40" r="32" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round"
+                            cx="60" cy="60" r="50" stroke="currentColor" strokeWidth="8" fill="none" strokeLinecap="round"
                             className={hoursProgress.isCompleted ? 'text-emerald-400' : 'text-blue-400'}
                             style={{
-                              strokeDasharray: `${2 * Math.PI * 32}`,
-                              strokeDashoffset: `${2 * Math.PI * 32 * (1 - hoursProgress.progressPercentage / 100)}`,
+                              strokeDasharray: `${2 * Math.PI * 50}`,
+                              strokeDashoffset: `${2 * Math.PI * 50 * (1 - hoursProgress.progressPercentage / 100)}`,
                               transition: 'stroke-dashoffset 1s ease-in-out'
                             }}
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className={`text-lg font-bold ${hoursProgress.isCompleted ? 'text-emerald-400' : 'text-blue-400'}`}>
+                            <div className={`text-2xl font-bold ${hoursProgress.isCompleted ? 'text-emerald-400' : 'text-blue-400'}`}>
                               {Number(hoursProgress.progressPercentage).toFixed(0)}%
                             </div>
+                            <div className="text-xs text-slate-400 mt-1">Complete</div>
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="space-y-2 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Required:</span>
-                        <span className="text-blue-400 font-medium">{Number(hoursProgress.requiredHours).toFixed(0)}h</span>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400">Required Hours:</span>
+                        <span className="text-blue-400 font-semibold">{Number(hoursProgress.requiredHours).toFixed(1)}h</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Worked:</span>
-                        <span className="text-emerald-400 font-medium">{Number(hoursProgress.workedHours).toFixed(0)}h</span>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400">Worked Hours:</span>
+                        <span className="text-emerald-400 font-semibold">{Number(hoursProgress.workedHours).toFixed(1)}h</span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span className="text-slate-400">Remaining:</span>
-                        <span className={`font-medium ${hoursProgress.isCompleted ? 'text-emerald-400' : 'text-orange-400'}`}>
-                          {hoursProgress.isCompleted ? 'Done!' : `${Number(hoursProgress.remainingHours).toFixed(0)}h`}
+                        <span className={`font-semibold ${hoursProgress.isCompleted ? 'text-emerald-400' : 'text-orange-400'}`}>
+                          {hoursProgress.isCompleted ? 'Completed!' : `${Number(hoursProgress.remainingHours).toFixed(1)}h`}
                         </span>
                       </div>
                     </div>
                     
                     {hoursProgress.isCompleted && (
-                      <div className="bg-emerald-900/30 p-2 rounded-lg border border-emerald-800/50 mt-3">
-                        <div className="flex items-center gap-2">
-                          <Award className="w-3 h-3 text-emerald-400" />
-                          <p className="text-xs text-emerald-400 font-medium">Completed!</p>
+                      <div className="bg-emerald-900/30 p-4 rounded-lg border border-emerald-800/50 mt-6">
+                        <div className="flex items-center gap-3">
+                          <Award className="w-5 h-5 text-emerald-400" />
+                          <div>
+                            <p className="text-emerald-400 font-semibold">Congratulations!</p>
+                            <p className="text-emerald-300 text-sm">You've completed your required hours</p>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -482,147 +486,147 @@ export function TimeTracking() {
                 </div>
               )}
 
-              {/* Main Activity Panel - Compact */}
-              <div className={`${hoursProgress ? 'lg:col-span-9' : 'lg:col-span-12'}`}>
-                <div className="grid lg:grid-cols-2 gap-4 h-full">
-                  {/* Time Display */}
-                  <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 rounded-xl p-4 border border-slate-700/50">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Calendar className="w-4 h-4 text-emerald-400" />
-                      <h3 className="text-sm font-semibold text-white">Today's Activity</h3>
+              {/* Main Activity Panel */}
+              <div className={`${hoursProgress ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+                <div className="grid lg:grid-cols-2 gap-6 h-full">
+                  {/* Today's Activity */}
+                  <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 rounded-xl p-6 border border-slate-700/50">
+                    <div className="flex items-center gap-3 mb-6">
+                      <Calendar className="w-6 h-6 text-emerald-400" />
+                      <h3 className="text-lg font-semibold text-white">Today's Activity</h3>
                     </div>
                     
                     {todayEntry ? (
-                      <div className="space-y-3">
-                        {/* Compact Time Cards */}
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="bg-emerald-900/30 p-3 rounded-lg border border-emerald-800/50">
-                            <div className="flex items-center gap-2 mb-1">
-                              <Play className="w-3 h-3 text-emerald-400" />
-                              <span className="text-xs text-emerald-400">Clock In</span>
+                      <div className="space-y-6">
+                        {/* Clock Times */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-emerald-900/30 p-4 rounded-lg border border-emerald-800/50">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Play className="w-4 h-4 text-emerald-400" />
+                              <span className="text-sm text-emerald-400 font-medium">Clock In</span>
                             </div>
-                            <div className={`text-lg font-mono font-bold ${isLateClockIn() ? 'text-red-400' : 'text-emerald-400'}`}>
+                            <div className={`text-xl font-mono font-bold ${isLateClockIn() ? 'text-red-400' : 'text-emerald-400'}`}>
                               {formatTime(todayEntry.clock_in).slice(0, -3)}
                             </div>
                             {isLateClockIn() && (
-                              <span className="bg-red-900/30 text-red-400 px-1 py-0.5 rounded text-xs">Late</span>
+                              <span className="bg-red-900/30 text-red-400 px-2 py-1 rounded text-xs mt-2 inline-block">
+                                Late by {formatTimeDisplay(lateTime)}
+                              </span>
                             )}
                           </div>
 
-                          <div className="bg-red-900/30 p-3 rounded-lg border border-red-800/50">
-                            <div className="flex items-center gap-2 mb-1">
-                              <Square className="w-3 h-3 text-red-400" />
-                              <span className="text-xs text-red-400">Clock Out</span>
+                          <div className="bg-red-900/30 p-4 rounded-lg border border-red-800/50">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Square className="w-4 h-4 text-red-400" />
+                              <span className="text-sm text-red-400 font-medium">Clock Out</span>
                             </div>
-                            <div className="text-lg font-mono font-bold text-red-400">
+                            <div className="text-xl font-mono font-bold text-red-400">
                               {todayEntry.clock_out ? formatTime(todayEntry.clock_out).slice(0, -3) : 'Active'}
                             </div>
-                          </div>
-                        </div>
-
-                        {/* Worked Time - Compact */}
-                        <div className="bg-blue-900/30 p-3 rounded-lg border border-blue-800/50">
-                          <div className="flex items-center justify-between mb-1">
-                            <div className="flex items-center gap-2">
-                              <Timer className="w-4 h-4 text-blue-400" />
-                              <span className="text-sm text-white font-medium">Time Worked</span>
-                            </div>
                             {!todayEntry.clock_out && (
-                              <div className="flex items-center gap-1">
-                                <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                                <span className="text-xs text-emerald-400">Live</span>
+                              <div className="flex items-center gap-2 mt-2">
+                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                                <span className="text-emerald-400 text-xs">Currently working</span>
                               </div>
                             )}
                           </div>
-                          <div className="text-2xl font-mono font-bold text-blue-400">
+                        </div>
+
+                        {/* Worked Time Display */}
+                        <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-800/50">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <Timer className="w-5 h-5 text-blue-400" />
+                              <span className="text-white font-semibold">Time Worked Today</span>
+                            </div>
+                            {!todayEntry.clock_out && (
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                                <span className="text-emerald-400 text-sm">Live</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-3xl font-mono font-bold text-blue-400">
                             {formatTimeDisplay(workedTime)}
                           </div>
                         </div>
 
-                        {/* Warnings & Status - Compact */}
-                        {isLateClockIn() && (
-                          <div className="bg-red-900/30 p-2 rounded-lg border border-red-800/50">
-                            <div className="flex items-center gap-2">
-                              <AlertCircle className="w-3 h-3 text-red-400" />
-                              <p className="text-xs text-red-400">
-                                Late: {formatTimeDisplay(lateTime)} after 7:00 AM
-                              </p>
-                            </div>
-                          </div>
-                        )}
-
+                        {/* Status Alerts */}
                         {isAfterShiftHours() && !todayEntry.clock_out && (
-                          <div className="bg-orange-900/30 p-2 rounded-lg border border-orange-800/50">
-                            <div className="flex items-center gap-2">
-                              <Clock className="w-3 h-3 text-orange-400" />
+                          <div className="bg-orange-900/30 p-4 rounded-lg border border-orange-800/50">
+                            <div className="flex items-center gap-3">
+                              <Zap className="w-5 h-5 text-orange-400" />
                               <div>
-                                <p className="text-xs text-orange-400 font-medium">Potential Overtime</p>
-                                <p className="text-xs text-orange-300">{formatTimeDisplay(overtimeTime)} past 4:00 PM</p>
+                                <p className="text-orange-400 font-semibold">Potential Overtime</p>
+                                <p className="text-orange-300 text-sm">{formatTimeDisplay(overtimeTime)} past 4:00 PM</p>
                               </div>
                             </div>
                           </div>
                         )}
 
                         {todayEntry.overtime_requested && (
-                          <div className={`p-2 rounded-lg border ${
+                          <div className={`p-4 rounded-lg border ${
                             todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
                               ? 'bg-yellow-900/30 border-yellow-800/50'
                               : todayEntry.overtime_approved 
                                 ? 'bg-emerald-900/30 border-emerald-800/50'
                                 : 'bg-red-900/30 border-red-800/50'
                           }`}>
-                            <div className="flex items-center gap-2">
-                              <AlertCircle className={`w-3 h-3 ${
+                            <div className="flex items-center gap-3">
+                              <AlertCircle className={`w-5 h-5 ${
                                 todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
                                   ? 'text-yellow-400'
                                   : todayEntry.overtime_approved 
                                     ? 'text-emerald-400'
                                     : 'text-red-400'
                               }`} />
-                              <p className={`text-xs font-medium ${
-                                todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
-                                  ? 'text-yellow-400'
-                                  : todayEntry.overtime_approved 
-                                    ? 'text-emerald-400'
-                                    : 'text-red-400'
-                              }`}>
-                                {todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
-                                  ? 'Overtime Pending'
-                                  : todayEntry.overtime_approved 
-                                    ? 'Overtime Approved ✓'
-                                    : 'Overtime Rejected ✗'
-                                }
-                              </p>
+                              <div>
+                                <p className={`font-semibold ${
+                                  todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
+                                    ? 'text-yellow-400'
+                                    : todayEntry.overtime_approved 
+                                      ? 'text-emerald-400'
+                                      : 'text-red-400'
+                                }`}>
+                                  {todayEntry.overtime_approved === null || todayEntry.overtime_approved === undefined
+                                    ? 'Overtime Request Pending'
+                                    : todayEntry.overtime_approved 
+                                      ? 'Overtime Request Approved ✓'
+                                      : 'Overtime Request Rejected ✗'
+                                  }
+                                </p>
+                                <p className="text-sm text-slate-300">Waiting for admin review</p>
+                              </div>
                             </div>
                           </div>
                         )}
                       </div>
                     ) : (
-                      <div className="text-center py-6">
-                        <Clock className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-                        <h4 className="text-sm font-medium text-white mb-1">Ready to Start?</h4>
-                        <p className="text-xs text-slate-400">Clock in to begin tracking</p>
+                      <div className="text-center py-12">
+                        <Clock className="w-16 h-16 text-slate-500 mx-auto mb-4" />
+                        <h4 className="text-lg font-semibold text-white mb-2">Ready to Start Your Day?</h4>
+                        <p className="text-slate-400">Click the Clock In button to begin tracking your time</p>
                       </div>
                     )}
                   </div>
 
                   {/* Actions & Info Panel */}
-                  <div className="space-y-4">
-                    {/* Action Buttons - Compact */}
-                    <div className="bg-slate-700/30 rounded-xl p-4 border border-slate-600/50">
-                      <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-emerald-400" />
+                  <div className="space-y-6">
+                    {/* Action Buttons */}
+                    <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600/50">
+                      <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <Zap className="w-5 h-5 text-emerald-400" />
                         Quick Actions
                       </h4>
                       
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {!todayEntry && (
                           <button
                             onClick={handleClockIn}
                             disabled={isLoading}
-                            className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white py-2 px-4 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 btn-enhanced flex items-center justify-center gap-2 text-sm"
+                            className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white py-3 px-4 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 btn-enhanced flex items-center justify-center gap-2 shadow-lg"
                           >
-                            <Play className="w-4 h-4" />
+                            <Play className="w-5 h-5" />
                             {isLoading ? 'Clocking In...' : 'Clock In'}
                           </button>
                         )}
@@ -631,9 +635,9 @@ export function TimeTracking() {
                           <button
                             onClick={handleClockOut}
                             disabled={isLoading}
-                            className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-medium hover:from-red-600 hover:to-red-700 disabled:opacity-50 btn-enhanced flex items-center justify-center gap-2 text-sm"
+                            className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-4 rounded-lg font-medium hover:from-red-600 hover:to-red-700 disabled:opacity-50 btn-enhanced flex items-center justify-center gap-2 shadow-lg"
                           >
-                            <Square className="w-4 h-4" />
+                            <Square className="w-5 h-5" />
                             {isLoading ? 'Clocking Out...' : 'Clock Out'}
                           </button>
                         )}
@@ -641,71 +645,80 @@ export function TimeTracking() {
                         {todayEntry && todayEntry.clock_in && todayEntry.clock_out && (
                           <button
                             onClick={handleClockIn}
-                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 btn-enhanced flex items-center justify-center gap-2 text-sm"
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 btn-enhanced flex items-center justify-center gap-2 shadow-lg"
                           >
-                            <Play className="w-4 h-4" />
-                            New Session
+                            <Play className="w-5 h-5" />
+                            Start New Session
                           </button>
                         )}
                         
                         <button
                           onClick={() => setShowOvertimeModal(true)}
-                          className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 px-4 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 btn-enhanced flex items-center justify-center gap-2 text-sm"
+                          className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-4 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 btn-enhanced flex items-center justify-center gap-2 shadow-lg"
                         >
-                          <Clock className="w-4 h-4" />
+                          <Clock className="w-5 h-5" />
                           Request Overtime
                         </button>
                       </div>
                     </div>
 
-                    {/* Shift Info - Compact */}
-                    <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
-                      <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 text-purple-400" />
-                
-                        Shift Info
+                    {/* Shift Information */}
+                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
+                      <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5 text-purple-400" />
+                        Shift Information
                       </h4>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="bg-slate-700/30 p-2 rounded">
-                          <div className="flex items-center gap-1 mb-1">
-                            <Clock className="w-3 h-3 text-emerald-400" />
-                            <span className="text-emerald-400 font-medium">Regular</span>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-slate-700/30 p-4 rounded-lg">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Clock className="w-4 h-4 text-emerald-400" />
+                            <span className="text-emerald-400 font-medium">Regular Hours</span>
                           </div>
                           <p className="text-white font-semibold">7:00 AM - 3:30 PM</p>
+                          <p className="text-slate-400 text-sm">₱200 daily cap</p>
                         </div>
                         
-                        <div className="bg-slate-700/30 p-2 rounded">
-                          <div className="flex items-center gap-1 mb-1">
-                            <TrendingUp className="w-3 h-3 text-orange-400" />
-                            <span className="text-orange-400 font-medium">Overtime</span>
+                        <div className="bg-slate-700/30 p-4 rounded-lg">
+                          <div className="flex items-center gap-2 mb-2">
+                            <TrendingUp className="w-4 h-4 text-orange-400" />
+                            <span className="text-orange-400 font-medium">Overtime Rate</span>
                           </div>
                           <p className="text-white font-semibold">₱35/hour</p>
+                          <p className="text-slate-400 text-sm">After 3:30 PM</p>
                         </div>
                         
-                        <div className="bg-slate-700/30 p-2 rounded">
-                          <div className="flex items-center gap-1 mb-1">
-                            <AlertCircle className="w-3 h-3 text-red-400" />
-                            <span className="text-red-400 font-medium">Late</span>
+                        <div className="bg-slate-700/30 p-4 rounded-lg">
+                          <div className="flex items-center gap-2 mb-2">
+                            <AlertCircle className="w-4 h-4 text-red-400" />
+                            <span className="text-red-400 font-medium">Late Penalty</span>
                           </div>
-                          <p className="text-white font-semibold">-₱25/hour</p>
+                          <p className="text-white font-semibold">₱23.53/hour</p>
+                          <p className="text-slate-400 text-sm">After 7:00 AM</p>
                         </div>
                         
-                        <div className="bg-slate-700/30 p-2 rounded">
-                          <div className="flex items-center gap-1 mb-1">
-                            <Home className="w-3 h-3 text-purple-400" />
+                        <div className="bg-slate-700/30 p-4 rounded-lg">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Home className="w-4 h-4 text-purple-400" />
                             <span className="text-purple-400 font-medium">Staff House</span>
                           </div>
                           {user?.staff_house ? (
-                            <p className="text-emerald-400 font-semibold">-₱250/week</p>
+                            <>
+                              <p className="text-emerald-400 font-semibold">Enrolled</p>
+                              <p className="text-slate-400 text-sm">₱250/week deduction</p>
+                            </>
                           ) : (
-                            <p className="text-slate-300 font-semibold">Not Enrolled</p>
+                            <>
+                              <p className="text-slate-300 font-semibold">Not Enrolled</p>
+                              <p className="text-slate-400 text-sm">No deduction</p>
+                            </>
                           )}
                         </div>
                       </div>
                       
-                      <div className="mt-3 p-2 bg-blue-900/20 rounded border border-blue-800/50">
-                        <p className="text-xs text-blue-300">
-                          Base pay capped at ₱200 for 8.5 hours • Work hours count from 7:00 AM onwards
+                      <div className="mt-4 p-4 bg-blue-900/20 rounded-lg border border-blue-800/50">
+                        <p className="text-sm text-blue-300">
+                          <strong>Note:</strong> Base pay is capped at ₱200 for 8.5 hours. Work hours are counted from 7:00 AM onwards only.
                         </p>
                       </div>
                     </div>
@@ -719,28 +732,28 @@ export function TimeTracking() {
         </div>
       </div>
 
-      {/* Modals remain the same but with updated styling for compactness */}
+      {/* Notifications Modal */}
       {showNotifications && notifications.length > 0 && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-slate-800/95 backdrop-blur-sm rounded-xl shadow-xl p-4 w-full max-w-sm border border-slate-700/50">
-            <div className="flex items-center gap-2 mb-3">
-              <AlertCircle className="w-5 h-5 text-emerald-400" />
-              <h3 className="text-lg font-semibold text-white">Overtime Updates</h3>
+          <div className="bg-slate-800/95 backdrop-blur-sm rounded-xl shadow-xl p-6 w-full max-w-md border border-slate-700/50">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="w-6 h-6 text-emerald-400" />
+              <h3 className="text-xl font-semibold text-white">Overtime Updates</h3>
             </div>
             
-            <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
+            <div className="space-y-3 mb-6 max-h-60 overflow-y-auto">
               {notifications.map((notification, index) => (
-                <div key={index} className={`p-2 rounded border text-sm ${
+                <div key={index} className={`p-4 rounded-lg border ${
                   notification.overtime_approved 
                     ? 'bg-emerald-900/20 border-emerald-800/50' 
                     : 'bg-red-900/20 border-red-800/50'
                 }`}>
-                  <span className={`font-medium ${
+                  <span className={`font-semibold ${
                     notification.overtime_approved ? 'text-emerald-400' : 'text-red-400'
                   }`}>
                     {notification.overtime_approved ? 'Overtime Approved ✓' : 'Overtime Rejected ✗'}
                   </span>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-sm text-slate-400 mt-1">
                     {new Date(notification.clock_in).toLocaleDateString()}
                   </p>
                 </div>
@@ -752,7 +765,7 @@ export function TimeTracking() {
                 setShowNotifications(false);
                 setNotifications([]);
               }}
-              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white py-2 px-4 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700"
+              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white py-3 px-4 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 btn-enhanced"
             >
               Got it!
             </button>
@@ -760,53 +773,54 @@ export function TimeTracking() {
         </div>
       )}
 
+      {/* Overtime Request Modal */}
       {showOvertimeModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-slate-800/95 backdrop-blur-sm rounded-xl shadow-xl p-4 w-full max-w-sm border border-slate-700/50">
-            <div className="flex items-center gap-2 mb-3">
-              <MessageSquare className="w-5 h-5 text-orange-400" />
-              <h3 className="text-lg font-semibold text-white">Overtime Request</h3>
+          <div className="bg-slate-800/95 backdrop-blur-sm rounded-xl shadow-xl p-6 w-full max-w-md border border-slate-700/50">
+            <div className="flex items-center gap-3 mb-4">
+              <MessageSquare className="w-6 h-6 text-orange-400" />
+              <h3 className="text-xl font-semibold text-white">Request Overtime</h3>
             </div>
             
-            <div className="bg-orange-900/20 p-3 rounded border border-orange-800/50 mb-3">
+            <div className="bg-orange-900/20 p-4 rounded-lg border border-orange-800/50 mb-4">
               <p className="text-sm text-orange-300">
                 {isAfterShiftHours() 
                   ? `Current overtime: ${formatTimeDisplay(overtimeTime)} past 4:00 PM`
-                  : 'Request overtime for work after 4:00 PM'
+                  : 'Submit a request for overtime work after 4:00 PM'
                 }
               </p>
             </div>
             
-            <div className="mb-4">
+            <div className="mb-6">
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Reason for Overtime <span className="text-red-400">*</span>
               </label>
               <textarea
                 value={overtimeNote}
                 onChange={(e) => setOvertimeNote(e.target.value)}
-                className="w-full p-2 bg-slate-700/50 border border-slate-600 rounded text-white placeholder-slate-400 text-sm"
-                rows={3}
+                className="w-full p-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 resize-none"
+                rows={4}
                 placeholder="Please explain the reason for overtime work..."
                 required
               />
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
                 onClick={() => {
                   setShowOvertimeModal(false);
                   setOvertimeNote('');
                 }}
-                className="flex-1 bg-slate-700/50 text-slate-300 py-2 px-3 rounded font-medium hover:bg-slate-600/50 text-sm"
+                className="flex-1 bg-slate-700/50 text-slate-300 py-3 px-4 rounded-lg font-medium hover:bg-slate-600/50 transition-all duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={submitOvertimeRequest}
                 disabled={!overtimeNote.trim() || isLoading}
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 text-white py-2 px-3 rounded font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 btn-enhanced text-sm"
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 text-white py-3 px-4 rounded-lg font-medium hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 btn-enhanced"
               >
-                {isLoading ? 'Processing...' : 'Submit'}
+                {isLoading ? 'Submitting...' : 'Submit Request'}
               </button>
             </div>
           </div>
