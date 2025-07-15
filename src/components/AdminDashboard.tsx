@@ -35,13 +35,13 @@ export function AdminDashboard() {
   const fetchStats = async () => {
     try {
       // Fetch users
-      const usersResponse = await fetch('http://192.168.100.60:3001/api/users', {
+      const usersResponse = await fetch('http://localhost:3001/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const users = await usersResponse.json();
       
       // Fetch overtime requests
-      const overtimeResponse = await fetch('http://192.168.100.60:3001/api/overtime-requests', {
+      const overtimeResponse = await fetch('http://localhost:3001/api/overtime-requests', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const overtimeRequests = await overtimeResponse.json();
