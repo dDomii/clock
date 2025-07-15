@@ -23,6 +23,9 @@ export const API_ENDPOINTS = {
   OVERTIME_REQUEST: `${API_BASE_URL}/api/overtime-request`,
   OVERTIME_NOTIFICATIONS: `${API_BASE_URL}/api/overtime-notifications`,
   
+  // Admin overtime endpoints
+  OVERTIME_APPROVE: (id: string) => `${API_BASE_URL}/api/overtime-requests/${id}/approve`,
+  
   // Payroll endpoints
   PAYSLIPS_GENERATE: `${API_BASE_URL}/api/payslips/generate`,
   PAYSLIPS_RELEASE: `${API_BASE_URL}/api/payslips/release`,
@@ -31,6 +34,7 @@ export const API_ENDPOINTS = {
   
   // Logs endpoints
   TIME_LOGS: `${API_BASE_URL}/api/time-logs`,
+  PAYSLIP_LOGS: `${API_BASE_URL}/api/payslip-logs`,
   PAYSLIP_LOGS: `${API_BASE_URL}/api/payslip-logs`,
   
   // Live reports

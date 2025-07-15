@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS } from '../config/api';
 import { Calendar, Clock, User, Download, Filter } from 'lucide-react';
 
 interface TimeLog {
@@ -91,7 +92,7 @@ export function TimeLogs() {
   const fetchTimeLogs = async (weekStart?: string) => {
     setLoading(true);
     try {
-      let url = 'http://192.168.100.60:3001/api/time-logs';
+      let url = API_ENDPOINTS.TIME_LOGS;
       if (weekStart) {
         url += `?weekStart=${weekStart}`;
       }

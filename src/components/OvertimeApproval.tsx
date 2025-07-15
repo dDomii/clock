@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS } from '../config/api';
 import { Clock, Check, X, MessageSquare } from 'lucide-react';
 
 interface OvertimeRequest {
@@ -23,7 +24,7 @@ export function OvertimeApproval() {
 
   const fetchOvertimeRequests = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/overtime-requests', {
+      const response = await fetch(API_ENDPOINTS.OVERTIME_REQUESTS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -36,7 +37,7 @@ export function OvertimeApproval() {
   const handleApproval = async (requestId: number, approved: boolean) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/overtime-requests/${requestId}/approve`, {
+      const response = await fetch(`${API_ENDPOINTS.OVERTIME_REQUESTS}/${requestId}/approve`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

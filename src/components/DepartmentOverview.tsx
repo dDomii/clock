@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS } from '../config/api';
 import { Users, Clock, Target, TrendingUp, Edit3, Save, X, Building2, User, BarChart3 } from 'lucide-react';
 
 interface User {
@@ -48,7 +49,7 @@ export function DepartmentOverview() {
     setLoading(true);
     try {
       // Fetch users
-      const usersResponse = await fetch('http://192.168.100.60:3001/api/users', {
+      const usersResponse = await fetch(API_ENDPOINTS.USERS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const usersData = await usersResponse.json();
@@ -84,7 +85,7 @@ export function DepartmentOverview() {
     }
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/users/${userId}`, {
+      const response = await fetch(`${API_ENDPOINTS.USERS}/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

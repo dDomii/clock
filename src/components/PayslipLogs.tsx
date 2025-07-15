@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS } from '../config/api';
 import { Calendar, User, FileText, Clock, Download, Filter, Search, Eye, Trash2, AlertTriangle } from 'lucide-react';
 
 interface PayslipLog {
@@ -35,7 +36,7 @@ export function PayslipLogs() {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/payslip-logs', {
+      const response = await fetch(API_ENDPOINTS.PAYSLIP_LOGS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -139,7 +140,7 @@ export function PayslipLogs() {
     if (!deletingLog) return;
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/payslip-logs/${deletingLog.id}`, {
+      const response = await fetch(`${API_ENDPOINTS.PAYSLIP_LOGS}/${deletingLog.id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
