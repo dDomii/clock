@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { buildApiUrl } from '../config/api';
 import { Calendar, PhilippinePeso, Clock, TrendingUp, Download } from 'lucide-react';
 
 interface PayrollEntry {
@@ -106,15 +107,22 @@ export function PayrollHistory() {
     
     setLoading(true);
     try {
-      let url = `http://192.168.100.60:3001/api/user-payroll-history`;
+      let url = buildApiUrl('/api/user-payroll-history');
       
       if (selectedDay) {
         // If specific day is selected, fetch only that day's data
-        url += `?specificDay=${selectedDay}&status=released`;
+        url = buildApiUrl('/api/user-payroll-history', {
+          specificDay: selectedDay,
+          status: 'released'
+        });
       } else {
         // Fetch entire week
         const weekEnd = selectedWeek ? getWeekEnd(selectedWeek) : new Date().toISOString().split('T')[0];
-        url += `?weekStart=${selectedWeek}&weekEnd=${weekEnd}&status=released`;
+        url = buildApiUrl('/api/user-payroll-history', {
+          weekStart: selectedWeek,
+          weekEnd: weekEnd,
+          status: 'released'
+        });
       }
       
       const response = await fetch(url, {

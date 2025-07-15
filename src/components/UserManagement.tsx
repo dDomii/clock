@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { API_ENDPOINTS, buildApiUrl } from '../config/api';
 import { Plus, Edit2, User, Shield, Clock, Trash2, ChevronDown, ChevronUp, Download, Search, Filter, X } from 'lucide-react';
 
 interface User {
@@ -160,7 +161,7 @@ export function UserManagement() {
   };
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/users', {
+      const response = await fetch(API_ENDPOINTS.USERS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -175,8 +176,8 @@ export function UserManagement() {
     
     try {
       const url = editingUser 
-        ? `http://192.168.100.60:3001/api/users/${editingUser.id}`
-        : 'http://192.168.100.60:3001/api/users';
+        ? `${API_ENDPOINTS.USERS}/${editingUser.id}`
+        : API_ENDPOINTS.USERS;
       
       const method = editingUser ? 'PUT' : 'POST';
       
@@ -210,7 +211,7 @@ export function UserManagement() {
     if (!selectedUserId) return;
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/users/${selectedUserId}/adjust-time`, {
+      const response = await fetch(`${API_ENDPOINTS.USERS}/${selectedUserId}/adjust-time`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -242,7 +243,7 @@ export function UserManagement() {
     if (!deletingUser) return;
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/users/${deletingUser.id}`, {
+      const response = await fetch(`${API_ENDPOINTS.USERS}/${deletingUser.id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
