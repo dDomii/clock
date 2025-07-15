@@ -35,7 +35,7 @@ export function PayslipLogs() {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/payslip-logs', {
+      const response = await fetch('http://localhost:3001/api/payslip-logs', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -139,7 +139,7 @@ export function PayslipLogs() {
     if (!deletingLog) return;
 
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/payslip-logs/${deletingLog.id}`, {
+      const response = await fetch(`http://localhost:3001/api/payslip-logs/${deletingLog.id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

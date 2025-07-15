@@ -91,7 +91,7 @@ export function TimeLogs() {
   const fetchTimeLogs = async (weekStart?: string) => {
     setLoading(true);
     try {
-      let url = 'http://192.168.100.60:3001/api/time-logs';
+      let url = 'http://localhost:3001/api/time-logs';
       if (weekStart) {
         url += `?weekStart=${weekStart}`;
       }

@@ -65,7 +65,7 @@ export function TimeTracking() {
 
   const fetchTodayEntry = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/today-entry', {
+      const response = await fetch('http://localhost:3001/api/today-entry', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -77,7 +77,7 @@ export function TimeTracking() {
 
   const fetchHoursProgress = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/user-hours-progress', {
+      const response = await fetch('http://localhost:3001/api/user-hours-progress', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -95,7 +95,7 @@ export function TimeTracking() {
     }
 
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/user-required-hours', {
+      const response = await fetch('http://localhost:3001/api/user-required-hours', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ export function TimeTracking() {
 
   const fetchOvertimeNotifications = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/overtime-notifications', {
+      const response = await fetch('http://localhost:3001/api/overtime-notifications', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -137,7 +137,7 @@ export function TimeTracking() {
   const handleClockIn = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/clock-in', {
+      const response = await fetch('http://localhost:3001/api/clock-in', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -168,7 +168,7 @@ export function TimeTracking() {
 
   const resetAndClockIn = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/reset-clock-in', {
+      const response = await fetch('http://localhost:3001/api/reset-clock-in', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -193,7 +193,7 @@ export function TimeTracking() {
   const performClockOut = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/clock-out', {
+      const response = await fetch('http://localhost:3001/api/clock-out', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -230,7 +230,7 @@ export function TimeTracking() {
     setIsLoading(true);
     try {
       // Submit standalone overtime request (separate from clock out)
-      const response = await fetch('http://192.168.100.60:3001/api/overtime-request', {
+      const response = await fetch('http://localhost:3001/api/overtime-request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

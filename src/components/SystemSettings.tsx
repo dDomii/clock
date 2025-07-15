@@ -35,7 +35,7 @@ export function SystemSettings() {
 
   const fetchSettings = async () => {
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/system-settings', {
+      const response = await fetch('http://localhost:3001/api/system-settings', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -50,7 +50,7 @@ export function SystemSettings() {
   const fetchUsersWithHours = async () => {
     try {
       // Fetch users
-      const usersResponse = await fetch('http://192.168.100.60:3001/api/users', {
+      const usersResponse = await fetch('http://localhost:3001/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const usersData = await usersResponse.json();
@@ -59,7 +59,7 @@ export function SystemSettings() {
       const usersWithHours = await Promise.all(
         usersData.map(async (user: any) => {
           try {
-            const hoursResponse = await fetch(`http://192.168.100.60:3001/api/user-hours-progress`, {
+            const hoursResponse = await fetch(`http://localhost:3001/api/user-hours-progress`, {
               headers: { 
                 Authorization: `Bearer ${token}`,
                 'X-User-ID': user.id.toString() // We'll need to modify the backend to accept this
@@ -94,7 +94,7 @@ export function SystemSettings() {
   const handleSettingsUpdate = async () => {
     setSaving(true);
     try {
-      const response = await fetch('http://192.168.100.60:3001/api/system-settings', {
+      const response = await fetch('http://localhost:3001/api/system-settings', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export function SystemSettings() {
 
     setSaving(true);
     try {
-      const response = await fetch(`http://192.168.100.60:3001/api/users/${selectedUser.id}/hours-adjustment`, {
+      const response = await fetch(`http://localhost:3001/api/users/${selectedUser.id}/hours-adjustment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
